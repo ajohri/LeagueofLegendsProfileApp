@@ -28,35 +28,21 @@ export default class FirstScreen extends React.Component{
   // This is the actual fectch statement that is needed for this part of the assignment
   // Got this link from my users json file.
   fetchData = async () => {
-    const response = await fetch('https://api.github.com/users/ajohri/following');
-    const json = await response.json();
-    this.setState({data: json});
+    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/items?locale=en_US&api_key=RGAPI-70c7c2d8-37c0-47c1-9e8f-ff3d9894e702');
+    const json_raw = await response.json();
+    console.log(json_raw);
+    this.setState({data: json_raw.data});
   };
 
   // This just gets the icon and put it in a Image to display a user's name and pf pic
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> List of Items </Text>
-        <Text>
-          Amplifying Tome {'\n'}
-          Ancient Coin {'\n'}
-          B. F. Sword {'\n'}
-          Blasting Wand {'\n'}
-          Boots of Speed {'\n'}
-          Brawlers Gloves {'\n'}
-          Cloak of Agility {'\n'}
-          Cloth Armor {'\n'}
-          Cull {'\n'}
-          Dagger {'\n'}
-          Dorans Blade {'\n'}
-          Dorans Ring {'\n'}
-          Dorans Shield {'\n'}
-          Faerie Charm {'\n'}
-          Hunters Machete {'\n'}
-          Hunters Talisman {'\n'}
-        </Text>
-
+        <Text style={styles.title}> List of Items {'\n'}</Text>
+        <FlatList
+          data = {this.state.data.data}
+          renderItem = {({item}) => <Text>{item.name}</Text>}
+          />
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
           title = "Open DrawNavigator"
@@ -77,6 +63,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: 'black'
+  },
+  row: {
+    marginTop: 25,
   }
 });
 

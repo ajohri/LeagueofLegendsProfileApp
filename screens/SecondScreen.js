@@ -1,6 +1,7 @@
 import React from 'react';
-import {Linking, FlatList, StyleSheet, Text, View, Button, Image, AsyncStorage} from 'react-native';
+import {ListView, Linking, FlatList, StyleSheet, Text, View, Button, Image, AsyncStorage} from 'react-native';
 
+//global.champs = champs;
 export default class FirstScreen extends React.Component{
   static navigationOptions = {
     drawerLabel: 'Champions',
@@ -19,40 +20,20 @@ export default class FirstScreen extends React.Component{
   }
 
   fetchData = async () => {
-    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-0b5a069c-2e02-40fb-99ea-b2957f6f236f');
-    const json = await response.json();
-    console.log(json);
-    this.setState({data: json});
+    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-70c7c2d8-37c0-47c1-9e8f-ff3d9894e702');
+    const json_raw = await response.json();
+    console.log(json_raw);
+    this.setState({data: json_raw.data});
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> List of Champions </Text>
-        <Text>
-        Aatrox {'\n'}
-        Ahri {'\n'}
-        Akali {'\n'}
-        Alistar {'\n'}
-        Amumu {'\n'}
-        Anivia {'\n'}
-        Annie {'\n'}
-        Ashe {'\n'}
-        Azir {'\n'}
-        Blitzcrank {'\n'}
-        Brand {'\n'}
-        Braum {'\n'}
-        Caitlyn {'\n'}
-        Cassiopeia {'\n'}
-        Cho Gath {'\n'}
-        Corki {'\n'}
-        Darius {'\n'}
-        Diana {'\n'}
-        Dr. Mundo {'\n'}
-        Draven {'\n'}
-        </Text>
-
-
+        <Text style={styles.title}> List of Champions {'\n'}</Text>
+        <FlatList
+          data = {Object.keys(this.state.data)}
+          renderItem = {({item}) => <Text>{item}</Text>}
+          />
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
           title = "Open DrawNavigator"
@@ -65,7 +46,6 @@ export default class FirstScreen extends React.Component{
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
@@ -75,17 +55,3 @@ const styles = StyleSheet.create({
     color: 'black'
   }
 });
-
-
-// <FlatList
-//   data = {this.state.data}
-//   keyExtractor = {(x, i) => i}
-//   renderItem={({ item }) =>
-//     <Text onPress={() => {Linking.openURL(`${item.html_url}`)}}>
-//       {item.status.message} {'\n'}
-//       Project Title: {item.name} {'\n'}
-//       Project Owner: {item.owner.login} {'\n'}
-//       Project Description: {item.description} {'\n'}
-//     </Text>
-//   }
-// />

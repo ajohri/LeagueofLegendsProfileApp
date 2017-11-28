@@ -39,10 +39,10 @@ const DrawerExample = DrawerNavigator(
       path:'/',
       screen: ThirdScreen,
     },
-    // Fifth: {
-    //   path:'/',
-    //   screen: FourthScreen,
-    // },
+    Fifth: {
+      path:'/',
+      screen: FourthScreen,
+    },
     // Notification: {
     //   path:'/',
     //   screen: Notifications,

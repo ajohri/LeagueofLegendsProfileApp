@@ -17,10 +17,10 @@ export default class FirstScreen extends React.Component{
 
   fetchData = async () => {
     //var json = await AsyncStorage.getItem('ajohri');
-    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/items?locale=en_US&api_key=RGAPI-c8129122-b05b-4876-9367-b25624fbf83b');
-    const json_raw = await response.json();
-    console.log(json_raw);
-    this.setState({data: json_raw});
+    // const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-70c7c2d8-37c0-47c1-9e8f-ff3d9894e702');
+    // const json_raw = await response.json();
+    // console.log(Object.keys(json_raw.data));
+    // this.setState({data: Object.keys(json_raw.data)});
   };
 
   render() {
@@ -31,8 +31,7 @@ export default class FirstScreen extends React.Component{
         style={{width: 200, height: 50}}
         source={{uri: 'https://freelogo2016cdn.b-cdn.net/wp-content/uploads/2016/12/League-of-legends-logo.png'}}
       />
-        <Text>League of Legends Information App
-        {this.state.version}</Text>
+        <Text>League of Legends Information App {'\n'}</Text>
 
 
         <Button
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center'
   },
 });
