@@ -28,7 +28,7 @@ export default class FirstScreen extends React.Component{
   // This is the actual fectch statement that is needed for this part of the assignment
   // Got this link from my users json file.
   fetchData = async () => {
-    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/items?locale=en_US&api_key=RGAPI-70c7c2d8-37c0-47c1-9e8f-ff3d9894e702');
+    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/items?locale=en_US&api_key=RGAPI-ea16396c-8023-4ae7-8827-60678ea4a352');
     const json_raw = await response.json();
     console.log(json_raw);
     this.setState({data: json_raw.data});

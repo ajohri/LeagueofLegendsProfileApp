@@ -20,7 +20,7 @@ export default class FirstScreen extends React.Component{
   }
 
   fetchData = async () => {
-    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-70c7c2d8-37c0-47c1-9e8f-ff3d9894e702');
+    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-d35f6fed-82a2-424f-9d55-aad5c9ce32dc');
     const json_raw = await response.json();
     console.log(json_raw);
     this.setState({data: json_raw.data});
@@ -32,7 +32,8 @@ export default class FirstScreen extends React.Component{
         <Text style={styles.title}> List of Champions {'\n'}</Text>
         <FlatList
           data = {Object.keys(this.state.data)}
-          renderItem = {({item}) => <Text>{item}</Text>}
+          renderItem = {({item}) => <Text style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 10, paddingBottom: 10}}>
+          {item}</Text>}
           />
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}

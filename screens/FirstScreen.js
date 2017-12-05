@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableHighlight, StyleSheet, Text, View, Button, Image, AsyncStorage} from 'react-native';
+import {TouchableHighlight, StyleSheet, Text, View, Button, Image, AsyncStorage, TextInput, TouchableOpacity} from 'react-native';
 // import logo from './images/League-of-Legends-logo.png';
 
 export default class FirstScreen extends React.Component{
@@ -23,6 +23,12 @@ export default class FirstScreen extends React.Component{
     // this.setState({data: Object.keys(json_raw.data)});
   };
 
+  storeUser = async () => {
+    AsyncStorage.clear();
+    console.log(this.state.username);
+    AsyncStorage.setItem('username', this.state.username);
+  }
+
   render() {
     return <View style={styles.image}>
 
@@ -32,7 +38,13 @@ export default class FirstScreen extends React.Component{
         source={{uri: 'https://freelogo2016cdn.b-cdn.net/wp-content/uploads/2016/12/League-of-legends-logo.png'}}
       />
         <Text>League of Legends Information App {'\n'}</Text>
-
+        <TextInput underlineColorAndriod = 'transparent'
+        onChangeText={(username) => this.setState({username})}
+        value={this.state.username} placeholder='username'>
+        </TextInput>
+        <TouchableOpacity onPress={this.storeUser}>
+          <Text>Store Username</Text>
+        </TouchableOpacity>
 
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}

@@ -16,6 +16,7 @@ import FirstScreen from './screens/FirstScreen';
 import SecondScreen from './screens/SecondScreen';
 import ThirdScreen from './screens/ThirdScreen';
 import FourthScreen from './screens/FourthScreen';
+import FifthScreen from './screens/FifthScreen';
 import Login from './screens/Login';
 import Notifications from './screens/Notifications';
 import Search from './screens/Search';
@@ -42,6 +43,10 @@ const DrawerExample = DrawerNavigator(
     Fifth: {
       path:'/',
       screen: FourthScreen,
+    },
+    Sixth: {
+      path:'/',
+      screen: FifthScreen,
     },
     // Notification: {
     //   path:'/',
