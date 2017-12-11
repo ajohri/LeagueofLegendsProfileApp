@@ -28,7 +28,7 @@ export default class FourthScreen extends React.Component{
 
   lookup = async () =>{
     var token = await AsyncStorage.getItem('username');
-    var api_url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'+token+'?api_key=RGAPI-d35f6fed-82a2-424f-9d55-aad5c9ce32dc';
+    var api_url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'+token+'?api_key=RGAPI-09ed86fa-bd44-4169-b941-3e33602a9bfb';
     console.log(api_url);
     const response = await fetch(api_url);
     const json = await response.json();

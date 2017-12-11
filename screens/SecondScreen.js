@@ -20,7 +20,7 @@ export default class FirstScreen extends React.Component{
   }
 
   fetchData = async () => {
-    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-d35f6fed-82a2-424f-9d55-aad5c9ce32dc');
+    const response = await fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=RGAPI-09ed86fa-bd44-4169-b941-3e33602a9bfb');
     const json_raw = await response.json();
     console.log(json_raw);
     this.setState({data: json_raw.data});

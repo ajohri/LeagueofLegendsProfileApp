@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableHighlight, StyleSheet, Text, View, Button, Image, AsyncStorage, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import {BarChart} from 'react-native-charts'
 
 export default class FirstScreen extends React.Component{
   static navigationOptions = {
@@ -18,7 +19,7 @@ export default class FirstScreen extends React.Component{
     var summonerId = await AsyncStorage.getItem('summonerId');
     var summonerId_parsed = JSON.parse(summonerId);
     console.log(summonerId_parsed);
-    const response = await fetch('https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/'+summonerId_parsed+'?api_key=RGAPI-d35f6fed-82a2-424f-9d55-aad5c9ce32dc');
+    const response = await fetch('https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/'+summonerId_parsed+'?api_key=RGAPI-09ed86fa-bd44-4169-b941-3e33602a9bfb');
     const json = await response.json();
     //console.log(json);
     this.setState({data: json})
@@ -38,6 +39,35 @@ export default class FirstScreen extends React.Component{
           {item.queueType}: {item.tier} {item.rank}{'\n'}
           Number of Wins: {item.wins}{'\n'}
           Number of Losses: {item.losses}
+          <BarChart
+          dataSets={[
+            {
+              fillColor: '#46b3f7',
+              data: [
+                { value: 15 },
+                { value: 10 },
+                { value: 12 },
+                { value: 11 },
+              ]
+            },
+            {
+              fillColor: '#3386b9',
+              data: [
+                { value: 14 },
+                { value: 11 },
+                { value: 14 },
+                { value: 13 },
+              ]
+            },
+          ]}
+          graduation={1}
+          horizontal={false}
+          showGrid={true}
+          barSpacing={5}
+          style={{
+            height: 300,
+            margin: 15,
+          }}/>
           </Text>}
           />
 
