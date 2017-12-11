@@ -1,6 +1,8 @@
 import React from 'react';
 import {TouchableHighlight, StyleSheet, Text, View, Button, Image, AsyncStorage, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import {BarChart} from 'react-native-charts'
+
+import * as V from 'victory'
+import {VictoryBar, VictoryChart} from 'victory';
 
 export default class FirstScreen extends React.Component{
   static navigationOptions = {
@@ -39,37 +41,23 @@ export default class FirstScreen extends React.Component{
           {item.queueType}: {item.tier} {item.rank}{'\n'}
           Number of Wins: {item.wins}{'\n'}
           Number of Losses: {item.losses}
-          <BarChart
-          dataSets={[
-            {
-              fillColor: '#46b3f7',
-              data: [
-                { value: 15 },
-                { value: 10 },
-                { value: 12 },
-                { value: 11 },
-              ]
-            },
-            {
-              fillColor: '#3386b9',
-              data: [
-                { value: 14 },
-                { value: 11 },
-                { value: 14 },
-                { value: 13 },
-              ]
-            },
-          ]}
-          graduation={1}
-          horizontal={false}
-          showGrid={true}
-          barSpacing={5}
-          style={{
-            height: 300,
-            margin: 15,
-          }}/>
           </Text>}
+        />
+
+        <VictoryChart domainPadding={25}>
+          <VictoryBar
+            categories={{
+              x: ["birds", "cats", "dogs", "fish", "frogs"]
+            }}
+            data={[
+              {x: "cats", y: 1},
+              {x: "dogs", y: 2},
+              {x: "birds", y: 3},
+              {x: "fish", y: 2},
+              {x: "frogs", y: 1}
+            ]}
           />
+        </VictoryChart>
 
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
