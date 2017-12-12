@@ -31,32 +31,76 @@ export default class FirstScreen extends React.Component{
 
   render() {
     return <View style={styles.image}>
-
       <View style={styles.container}>
-      <Image
-        style={{width: 200, height: 50}}
-        source={{uri: 'https://freelogo2016cdn.b-cdn.net/wp-content/uploads/2016/12/League-of-legends-logo.png'}}
-      />
-        <Text>League of Legends Information App {'\n'}</Text>
-        <TextInput underlineColorAndriod = 'transparent'
-        onChangeText={(username) => this.setState({username})}
-        value={this.state.username} placeholder='username'>
-        </TextInput>
-        <TouchableOpacity onPress={this.storeUser}>
-          <Text>Store Username</Text>
-        </TouchableOpacity>
+        <Image
+          style={{width: null, height: null}}
+          source={{uri: 'https://freelogo2016cdn.b-cdn.net/wp-content/uploads/2016/12/League-of-legends-logo.png'}}
+        />
+          <Text>League of Legends Information App {'\n'}</Text>
+          <TextInput placeholder='username' style={styles.input} underlineColorAndriod = 'transparent'
+          onChangeText={(username) => this.setState({username})}
+          value={this.state.username} >
+          </TextInput>
+          <TouchableOpacity style={styles.button} onPress={this.storeUser}>
+            <Text style={styles.buttonText}>Store Username</Text>
+          </TouchableOpacity>
 
-        <Button
-          onPress={() => this.props.navigation.navigate('DrawerOpen')}
-          title = "Open DrawNavigator"
-          />
-      </View>
-
+          <Button
+            onPress={() => this.props.navigation.navigate('DrawerOpen')}
+            title = "Open DrawNavigator"
+            />
+        </View>
     </View>
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  markWrap: {
+    flex: 1,
+    paddingVertical: 30,
+  },
+  mark: {
+    width: null,
+    height: null,
+    flex: 1,
+  },
+
+  wrapper: {
+    paddingVertical: 30,
+  },
+  inputWrap: {
+    flexDirection: "row",
+    marginVertical: 10,
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: "#CCC",
+  },
+  iconWrap: {
+    paddingHorizontal: 7,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    height: 20,
+    width: 20,
+  },
+  input: {
+    paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: "#FF3366",
+    paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  buttonText: {
+    color: "#FFF",
+    fontSize: 18,
+  },
   image: {
     marginTop: 50,
     flex:1,
@@ -64,12 +108,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  container: {
-    flex: 2,
-    alignItems: 'center'
-  },
+
 });
 
+// background: {
+//   width,
+//   height,
+// },
 
 // <Text style={{fontSize: 20, color: 'black'}}>
 //   {'\t'} {'\t'}{this.state.data.login} {'\n'}

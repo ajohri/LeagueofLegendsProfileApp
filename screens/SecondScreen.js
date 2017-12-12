@@ -32,8 +32,17 @@ export default class FirstScreen extends React.Component{
         <Text style={styles.title}> List of Champions {'\n'}</Text>
         <FlatList
           data = {Object.keys(this.state.data)}
-          renderItem = {({item}) => <Text style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 10, paddingBottom: 10}}>
-          {item}</Text>}
+          renderItem = {({item}) =>
+          <View><Text
+            onPress = {() => {Linking.openURL('http://leagueoflegends.wikia.com/wiki/'+item)}}
+            style={{ flexDirection: 'row', backgroundColor: "#00ffff",borderColor: '#000000', paddingTop: 10, paddingBottom: 10}}>
+          {item}
+          </Text>
+          <Text
+            onPress = {() => {Linking.openURL('https://www.mobafire.com/league-of-legends/'+item+'-guide')}}
+            style={{ backgroundColor: "#ff0000"}}>
+            Guides
+          </Text></View>}
           />
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
@@ -48,7 +57,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 25,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#F5FCFF"
   },
   title: {

@@ -1,7 +1,6 @@
 import React from 'react';
-import {TouchableHighlight, StyleSheet, Text, View, Button, Image, AsyncStorage, TextInput, TouchableOpacity, FlatList} from 'react-native';
-
-import * as V from 'victory'
+import {TouchableHighlight, Linking, StyleSheet, Text, View, Button, Image, AsyncStorage, TextInput, TouchableOpacity, FlatList} from 'react-native';
+//import {BarChart} from 'react-native-charts';
 import {VictoryBar, VictoryChart} from 'victory';
 
 export default class FirstScreen extends React.Component{
@@ -10,7 +9,8 @@ export default class FirstScreen extends React.Component{
   }
 
   state = {
-    data: []
+    data: [],
+    username: ""
   }
 
   componentWillMount() {
@@ -19,12 +19,16 @@ export default class FirstScreen extends React.Component{
 
   fetchData = async () => {
     var summonerId = await AsyncStorage.getItem('summonerId');
+    var token = await AsyncStorage.getItem('username');
+    //console.log(token);
     var summonerId_parsed = JSON.parse(summonerId);
     console.log(summonerId_parsed);
     const response = await fetch('https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/'+summonerId_parsed+'?api_key=RGAPI-09ed86fa-bd44-4169-b941-3e33602a9bfb');
     const json = await response.json();
     //console.log(json);
-    this.setState({data: json})
+    this.setState({data: json});
+    this.setState({username: token});
+    console.log(this.state.username);
   }
 
   render() {
@@ -43,22 +47,11 @@ export default class FirstScreen extends React.Component{
           Number of Losses: {item.losses}
           </Text>}
         />
-
-        <VictoryChart domainPadding={25}>
-          <VictoryBar
-            categories={{
-              x: ["birds", "cats", "dogs", "fish", "frogs"]
-            }}
-            data={[
-              {x: "cats", y: 1},
-              {x: "dogs", y: 2},
-              {x: "birds", y: 3},
-              {x: "fish", y: 2},
-              {x: "frogs", y: 1}
-            ]}
-          />
-        </VictoryChart>
-
+        <Text
+          onPress = {() => {Linking.openURL('http://na.op.gg/summoner/userName='+this.state.username)}}
+          style={{ backgroundColor: "#ff0000"}}>
+          Match History
+        </Text>
         <Button
           onPress={() => this.props.navigation.navigate('DrawerOpen')}
           title = "Open DrawNavigator"
@@ -82,3 +75,49 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
+//
+//
+// <VictoryChart domainPadding={25}>
+//   <VictoryBar
+//     categories={{
+//       x: ["birds", "cats", "dogs", "fish", "frogs"]
+//     }}
+//     data={[
+//       {x: "cats", y: 1},
+//       {x: "dogs", y: 2},
+//       {x: "birds", y: 3},
+//       {x: "fish", y: 2},
+//       {x: "frogs", y: 1}
+//     ]}
+//   />
+// </VictoryChart>
+
+// <BarChart
+//   dataSets={[
+//     {
+//       fillColor: '#46b3f7',
+//       data: [
+//         { value: 15 },
+//         { value: 10 },
+//         { value: 12 },
+//         { value: 11 },
+//       ]
+//     },
+//     {
+//       fillColor: '#3386b9',
+//       data: [
+//         { value: 14 },
+//         { value: 11 },
+//         { value: 14 },
+//         { value: 13 },
+//       ]
+//     },
+//   ]}
+//   graduation={1}
+//   horizontal={false}
+//   showGrid={true}
+//   barSpacing={5}
+//   style={{
+//     height: 300,
+//     margin: 15,
+//   }}/>
